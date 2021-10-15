@@ -39,8 +39,6 @@ notes.post('/', (req, res) => {
       } else {
         const parsedNotes = JSON.parse(data);
         const updatedNotes = parsedNotes.push(noteObject);
-        console.log(updatedNotes);
-        console.log(parsedNotes);
 
         fs.writeFile(
           './db/db.json',
@@ -71,8 +69,9 @@ notes.delete('/:id', (req, res) => {
       const itemIndex = parsedNotes.findIndex(({ id }) => id == req.params.id);
       deletedNote = parsedNotes.splice(itemIndex, 1);
       updatedNotes = parsedNotes.splice(deletedNote);
-      console.log(updatedNotes);
+      // console.log(updatedNotes);
 
+      // Causing delete to run twice??? Bug 
       fs.writeFile(
         './db/db.json',
         JSON.stringify(updatedNotes),
