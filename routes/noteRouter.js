@@ -4,10 +4,11 @@ const { readAndAppend, writeToFile, readFromFile } = require('../helpers/helpers
 const path = require('path');
 const { response } = require('express');
 const fs = require('fs');
+const uuid = require('uuid');
+const { randomUUID } = require('crypto');
 
 // GET Route for notes page 
 notes.get('/', (req, res) => {
-  console.info(`${req.method} request received for note`);
   readFromFile('./db/db.json').then((data) => res.json(JSON.parse(data)));
 });
 
@@ -19,10 +20,16 @@ notes.post('/', (req, res) => {
   // Destructuring note for the items in req.body
   const noteText = req.body.text;
   const noteTitle = req.body.title;
+  const noteID = uuid.v4();
+  const noteObject = {
+    title: noteTitle,
+    text: noteText,
+    id: noteID
+  };
 
   // If all the required properties are present
   if (noteText && noteTitle) {
-    console.info(`${req.method} note logged`);
+    console.info(`${noteObject} note logged`);
     res.json(response);
 
     // push note object to array stored in db.json
@@ -31,7 +38,7 @@ notes.post('/', (req, res) => {
         console.error(err);
       } else {
         const parsedNotes = JSON.parse(data);
-        const updatedNotes = parsedNotes.push(req.body);
+        const updatedNotes = parsedNotes.push(noteObject);
         console.log(updatedNotes);
         console.log(parsedNotes);
 
