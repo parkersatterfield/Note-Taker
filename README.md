@@ -5,7 +5,11 @@
 ## [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0) 
 
 ## Mock Up
-![Mock Up](./public/assets/images/mock.png)  
+![Mock Up](./public/assets/images/mock.png) 
+
+## Links
+Github: https://github.com/parkersatterfield/Note-Taker
+Live: https://note-taker-parker.herokuapp.com/ 
 
 ## Table of Contents 
 
